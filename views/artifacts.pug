@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  - var results = [{ artifactName: "Ancient Vase", origin: "Greece", age: 2300 }, { artifactName: "Roman Coin", origin: "Rome", age: 1900 }, { artifactName: "Egyptian Statue", origin: "Egypt", age: 3200 }];
+  .container-fluid
+    .row
+      each item, index in results
+        div(class="col-sm-2", onclick=`buy(${index})`)
+          h3 #{item.artifactName}
+          p Origin: #{item.origin}
+          p Age: #{item.age} years
+
+          script.
+            function buy(itemNum){
+              alert(`You purchased item ${itemNum + 1}`);
+            }
+
