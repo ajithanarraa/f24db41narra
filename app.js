@@ -44,6 +44,7 @@ app.use('/users', usersRouter);
 app.use('/grid', gridRouter);
 app.use('/pick', pickRouter);
 app.use('/artifact', artifactRouter);  // Use the artifact route
+app.use('/resource', artifactRouter);
 
 // 404 route handler (make sure this is at the bottom to catch unmatched routes)
 app.use((req, res, next) => {
