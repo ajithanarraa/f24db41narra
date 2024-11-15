@@ -16,18 +16,10 @@ var resourceRouter = require('./routes/resource');  // Resource router
 // MongoDB imports
 const mongoose = require('mongoose');
 
-mongoose.connect('your_connection_string', {
+mongoose.connect('mongodb+srv://ajithanarra24:ugekUdGXDkr3vqem@cluster0.m85be.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   serverSelectionTimeoutMS: 10000,
 }).then(() => {
-  console.log('Connected to MongoDB');
-
-  const testSchema = new mongoose.Schema({ name: String });
-  const Test = mongoose.model('Test', testSchema);
-
-  Test.create({ name: 'Test Document' })
-      .then(doc => console.log('Document created:', doc))
-      .catch(err => console.error('Create operation failed:', err))
-      .finally(() => mongoose.connection.close());
+  console.log('Connected to MongoDB Atlas');
 }).catch((err) => {
   console.error('Database connection error:', err);
 });
