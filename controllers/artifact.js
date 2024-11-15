@@ -1,56 +1,67 @@
-// artifact.js in controllers
-var Artifact = require('../models/artifact');
+const Artifact = require('../models/artifact');  // Assuming Artifact model is created
 
-// List of all Artifacts
-exports.artifact_list = async function(req, res) {
-    try {
-        const artifacts = await Artifact.find();  // Fetch all artifacts from the database
-        res.send(artifacts);  // Send the list as JSON
-    } catch (err) {
-        res.status(500);
-        res.send(`{"error": "${err}"}`);
-    }
+// List all artifacts
+exports.artifact_list = async function (req, res) {
+  try {
+    const artifacts = await Artifact.find();
+    res.send(artifacts);
+  } catch (err) {
+    res.status(500).send({ "error": err.message });
+  }
 };
 
-// VIEWS
-// Handle a show all view for artifacts
-exports.artifact_view_all_Page = async function(req, res) {
-    try {
-        const results = await Artifact.find();  
-        res.render('artifacts', { title: 'Artifact Search Results', results: results });
-    } catch (err) {
-        res.status(500);
-        res.send(`{"error": "${err}"}`);
-    }
+// View all artifacts (render view)
+exports.artifact_view_all_Page = async function (req, res) {
+  try {
+    const results = await Artifact.find();
+    res.render('artifacts', { title: 'Artifacts', results: results });
+  } catch (err) {
+    res.status(500).send(`{"error": ${err}}`);
+  }
 };
 
+// Get artifact details by ID
+exports.artifact_detail = async function (req, res) {
+  try {
+    const artifact = await Artifact.findById(req.params.id);
+    if (!artifact) return res.status(404).send('Artifact not found');
+    res.send(artifact);
+  } catch (err) {
+    res.status(500).send({ "error": err.message });
+  }
+};
 
+// Create new artifact
 exports.artifact_create_post = async function (req, res) {
-    console.log(req.body);
-    
-    let document = new Artifact();  // Create a new Artifact instance
-    document.artifactName = req.body.artifactName;  // Set artifact name
-    document.origin = req.body.origin;  // Set origin
-    document.age = req.body.age;  // Set age
-  
-    try {
-      let result = await document.save();  // Save the new artifact to the database
-      res.send(result);  // Send the saved document as response
-    } catch (err) {
-      res.status(500).send({ "error": `${err}` });  // Handle any errors during the save operation
-    }
-  };
-
-  
-exports.artifact_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Artifact detail: ' + req.params.id);
+  try {
+    const artifact = new Artifact({
+      artifactName: req.body.artifactName,
+      origin: req.body.origin,
+      age: req.body.age,
+    });
+    const result = await artifact.save();
+    res.send(result);
+  } catch (err) {
+    res.status(500).send({ "error": err.message });
+  }
 };
 
-
-exports.artifact_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: Artifact delete DELETE ' + req.params.id);
+// Update an artifact
+exports.artifact_update_put = async function (req, res) {
+  try {
+    const artifact = await Artifact.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.send(artifact);
+  } catch (err) {
+    res.status(500).send({ "error": err.message });
+  }
 };
 
-exports.artifact_update_put = function(req, res) {
-    res.send('NOT IMPLEMENTED: Artifact update PUT ' + req.params.id);
+// Delete an artifact
+exports.artifact_delete = async function (req, res) {
+  try {
+    await Artifact.findByIdAndDelete(req.params.id);
+    res.send('Artifact deleted');
+  } catch (err) {
+    res.status(500).send({ "error": err.message });
+  }
 };

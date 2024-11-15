@@ -1,19 +1,29 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+module.exports = router;
 
 // Require controller modules
-var api_controller = require('../controllers/api'); // Ensure this path is correct
-var artifact_controller = require('../controllers/artifact'); // Ensure this path is correct
+const api_controller = require('../controllers/api');
+const artifact_controller = require('../controllers/artifact');  // Changed from heritageSite_controller to artifact_controller
 
-// API Route
-router.get('/', api_controller.api); // This should call the api function defined in api.js
-// GET artifacts page, using the controller method to render all artifacts
-router.get('/', artifact_controller.artifact_view_all_Page);
-// Artifact Routes
-router.post('/artifact', artifact_controller.artifact_create_post);
-router.delete('/artifacts/:id', artifact_controller.artifact_delete);
-router.put('/artifacts/:id', artifact_controller.artifact_update_put);
-router.get('/artifacts/:id', artifact_controller.artifact_detail);
-router.get('/artifacts', artifact_controller.artifact_list);
+/// API ROUTE ///
+// GET resources base
+router.get('/', api_controller.api);
+
+/// ARTIFACT ROUTES ///
+// POST request for creating an Artifact
+router.post('/artifacts', artifact_controller.artifact_create_post);  // Changed from heritageSite_create_post to artifact_create_post
+
+// DELETE request to delete an Artifact
+router.delete('/artifacts/:id', artifact_controller.artifact_delete);  // Changed from heritageSite_delete to artifact_delete
+
+// PUT request to update an Artifact
+router.put('/artifacts/:id', artifact_controller.artifact_update_put);  // Changed from heritageSite_update_put to artifact_update_put
+
+// GET request for one Artifact
+router.get('/artifacts/:id', artifact_controller.artifact_detail);  // Changed from heritageSite_detail to artifact_detail
+
+// GET request for list of all Artifacts
+router.get('/artifacts', artifact_controller.artifact_list);  // Changed from heritageSite_list to artifact_list
 
 module.exports = router;

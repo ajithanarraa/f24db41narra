@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET artifacts page. */
-router.get('/', function(req, res, next) {
-    res.render('artifacts', { title: `Search Results for Artifacts` });
+// Example route for artifact
+router.get('/', (req, res) => {
+  res.send('Artifacts page');
 });
 
 module.exports = router;
