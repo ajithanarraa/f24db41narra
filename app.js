@@ -14,15 +14,27 @@ var pickRouter = require('./routes/pick');
 var resourceRouter = require('./routes/resource');  // Resource router
 
 // MongoDB imports
-const mongoose = require('mongoose');
+mongoose.connect('your_connection_string', {
+  serverSelectionTimeoutMS: 10000,
+}).then(() => {
+  console.log('Connected to MongoDB');
+
+  const testSchema = new mongoose.Schema({ name: String });
+  const Test = mongoose.model('Test', testSchema);
+
+  Test.create({ name: 'Test Document' })
+      .then(doc => console.log('Document created:', doc))
+      .catch(err => console.error('Create operation failed:', err))
+      .finally(() => mongoose.connection.close());
+}).catch((err) => {
+  console.error('Database connection error:', err);
+});
+
 const Artifact = require("./models/artifacts");
 
 var app = express();
 
 // MongoDB connection setup
-mongoose.connect(process.env.MONGO_CON, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error(`MongoDB connection error: ${err}`));
 
 // Middleware setup
 app.use(logger('dev'));
