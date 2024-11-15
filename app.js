@@ -45,14 +45,10 @@ app.use('/grid', gridRouter);
 app.use('/pick', pickRouter);
 app.use('/artifact', artifactRouter);  // Use the artifact route
 
-app.get('/artifacts', (req, res) => {
-  res.send('Artifacts page');
-});
-
+// 404 route handler (make sure this is at the bottom to catch unmatched routes)
 app.use((req, res, next) => {
   res.status(404).send('Route not found');
 });
-
 
 // Error handler
 app.use(function(err, req, res, next) {
