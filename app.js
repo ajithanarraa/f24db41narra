@@ -14,6 +14,8 @@ var pickRouter = require('./routes/pick');
 var resourceRouter = require('./routes/resource');  // Resource router
 
 // MongoDB imports
+const mongoose = require('mongoose');
+
 mongoose.connect('your_connection_string', {
   serverSelectionTimeoutMS: 10000,
 }).then(() => {
@@ -29,7 +31,6 @@ mongoose.connect('your_connection_string', {
 }).catch((err) => {
   console.error('Database connection error:', err);
 });
-
 const Artifact = require("./models/artifacts");
 
 var app = express();
