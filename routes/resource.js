@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const api_controller = require('../controllers/api');
-const artifact_controller = require('../controllers/artifactsController');
+const artifact_controller = require('../controllers/artifacts');
 
 router.get('/', api_controller.api);
 router.get('/artifacts', artifact_controller.artifact_list);
