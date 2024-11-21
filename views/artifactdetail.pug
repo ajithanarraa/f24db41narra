@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  - let artifactid = toShow._id
+  - let artifact_type = toShow.artifact_type
+  - let origin = toShow.origin
+  - let age = toShow.age
+  div
+    div.row
+      div(class='artifactAttr mr-3') Artifact ID is:
+      div #{artifactid}
+    div.row
+      div(class='artifactAttr mr-3') Artifact Type is:
+      div #{artifact_type}
+    div.row
+      div(class='artifactAttr mr-3') Artifact Size is:
+      div #{origin}
+    div.row
+      div(class='artifactAttr mr-3') Artifact Cost is:
+      div #{age}
