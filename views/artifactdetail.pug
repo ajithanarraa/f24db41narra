@@ -6,16 +6,18 @@ block content
   - let artifact_type = toShow.artifact_type
   - let origin = toShow.origin
   - let age = toShow.age
-  div
+  div.container
     div.row
-      div(class='artifactAttr mr-3') Artifact ID is:
-      div #{artifactid}
+      div.col-md-4.font-weight-bold Artifact ID:
+      div.col-md-8.text-info #{artifactid}
     div.row
-      div(class='artifactAttr mr-3') Artifact Type is:
-      div #{artifact_type}
+      div.col-md-4.font-weight-bold Artifact Type:
+      div.col-md-8.text-info #{artifact_type}
     div.row
-      div(class='artifactAttr mr-3') Artifact Size is:
-      div #{origin}
+      div.col-md-4.font-weight-bold Origin:
+      div.col-md-8.text-info #{origin}
     div.row
-      div(class='artifactAttr mr-3') Artifact Cost is:
-      div #{age}
+      div.col-md-4.font-weight-bold Age:
+      div.col-md-8.text-info #{age}
+
+  a.btn.btn-primary.mt-4(href='/artifacts') Back to List
