@@ -19,11 +19,11 @@ router.get('/detail', artifactsController.artifact_view_one_Page);
 // DELETE request to delete an artifact by ID
 router.delete('/artifacts/:id', artifact_controller.artifact_delete);
 /* GET create costume page */
-router.get('/create', artifact_controller.artifact_create_Page);
+router.get('/create', secured, artifact_controller.artifact_create_Page);
 /* GET update costume page */
 router.get('/update', secured, artifact_controller.artifact_update_Page);
 /* GET create update page */
 //router.get('/update', artifact_controller.artifact_update_Page);
 /* GET delete costume page */
-router.get('/delete', artifact_controller.artifact_delete_Page)
+router.get('/delete', secured, artifact_controller.artifact_delete_Page)
 module.exports = router;

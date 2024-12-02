@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const artifactSchema = new Schema({
   artifact_type: { 
     type: String, 
-    required: true 
+    required: true, 
+    minlength: [3, 'Site name must be at least 3 characters long'], 
+    maxlength: [100, 'Site name cannot exceed 100 characters']
   },
   origin: { 
     type: String, 
